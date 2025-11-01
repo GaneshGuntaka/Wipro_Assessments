@@ -33,12 +33,12 @@ public class Main7 {
     String title;
     String author;
     int year;
-    public Main(){
+    public Main7 () {
         title = "Not specified";
         author= "Unknown";
         year = 0;
     }
-    public Main(String title,String author, int year){
+    public Main7 (String title,String author, int year){
         this.title = title;
         this.author = author;
         this.year = year;

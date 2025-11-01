@@ -15,9 +15,9 @@
 
 class Main {
   public static void main(String args[]){
-ThreeDimensionShape shape1 = new ThreeDimensionShape(5, 6, 7); 
-ThreeDimensionShape shape2 = new ThreeDimensionShape();
-ThreeDimensionShape shape3 = new ThreeDimensionShape(8);
+    ThreeDimensionShape shape1 = new ThreeDimensionShape(5, 6, 7); 
+    ThreeDimensionShape shape2 = new ThreeDimensionShape();
+    ThreeDimensionShape shape3 = new ThreeDimensionShape(8);
 
 double volume;
 
