@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+header {
+  background-color: #1565c0;
+  color: white;
+}
+
+/* ✅ Logo and heading side by side and centered */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* aligns bottom edges nicely */
+  gap: 15px;
+  padding-top: 10px;
+}
+
+/* Logo style */
+.logo {
+  width: 65px;
+  height: 65px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 3px solid white;
+}
+
+/* ✅ Move heading slightly downward */
+.school-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 8px; /* moves text slightly down */
+}
+
+/* ===== MENU ===== */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #ffeb3b;
+}
+
+/* ===== WELCOME SECTION ===== */
+.welcome-section {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  border-radius: 20px;
+  width: 80%;
+  margin: 40px auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #0d47a1;
+}
+
+.welcome-section p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0d47a1;
+}
+
+/* ===== PROFILE SECTION ===== */
+.profile-section {
+  padding: 60px 20px;
+  width: 80%;
+  margin: 0 auto 50px;
+  background-color: #e3f2fd;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ✅ Align image and text horizontally */
+.profile-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* ✅ Rectangular ID-style photo */
+.student-photo {
+  width: 150px;
+  height: 190px;
+  border-radius: 8px;
+  border: 3px solid #0d47a1;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Bold title */
+.section-title {
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: #0d47a1;
+  margin-bottom: 25px;
+}
+
+.info p {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+/* ===== TIMETABLE SECTION ===== */
+.timetable-section {
+  text-align: center;
+  padding: 60px 20px;
+  width: 90%;
+  margin: 0 auto 50px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.timetable-section h2 {
+  color: #0d47a1;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.table {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #1565c0;
+  color: white;
+  font-size: 0.9rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .school-title {
+    font-size: 1.3rem;
+    margin-top: 5px;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .student-photo {
+    width: 130px;
+    height: 170px;
+  }
+
+  .welcome-section,
+  .profile-section,
+  .timetable-section {
+    width: 95%;
+    padding: 40px 10px;
+  }
+}
