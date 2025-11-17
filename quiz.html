@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Basics Quiz</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    margin: 0; padding: 0;
+}
+.container {
+    max-width: 900px; margin: 20px auto; background: #fff; border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); padding: 20px;
+}
+.header { display:flex; justify-content: space-between; align-items:center; }
+.header img { width:50px; height:50px; border-radius:50%; }
+.timer { font-weight:bold; font-size:18px; }
+h1 { text-align:center; color:#444; }
+.nav-grid {
+    display:flex; justify-content:center; flex-wrap:wrap; margin:15px 0;
+}
+.nav-grid div {
+    width:35px; height:35px; margin:5px; display:flex; align-items:center; justify-content:center;
+    border-radius:5px; cursor:pointer; background:#eee; font-weight:bold; transition:0.3s;
+}
+.nav-grid div.answered { background:green; color:#fff; }
+.nav-grid div.not-answered { background:red; color:#fff; }
+.nav-grid div.marked { background:purple; color:#fff; }
+.question { font-size:20px; margin-bottom:15px; }
+.options { list-style:none; padding:0; }
+.options li { margin:10px 0; }
+.options button { width:100%; padding:10px 15px; border:none; border-radius:10px; cursor:pointer;
+    font-size:16px; transition:0.2s; background:#f0f0f0; }
+.options button.selected { background:#6a11cb; color:#fff; }
+.options button:hover { transform: scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.2); background:#dce0ff; }
+.navigation { display:flex; justify-content:space-between; margin-top:20px; flex-wrap:wrap; }
+.navigation button { padding:10px 20px; border:none; border-radius:10px; cursor:pointer; background:#2575fc; color:#fff; font-size:16px; margin:5px; transition:0.3s; }
+.navigation button:hover { background:#6a11cb; }
+.result { text-align:center; }
+.review-list { text-align:left; margin-top:20px; }
+.correct { background:#d4edda; color:#155724; padding:5px; border-radius:5px; margin:5px 0; }
+.wrong { background:#f8d7da; color:#721c24; padding:5px; border-radius:5px; margin:5px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="https://i.pravatar.cc/50" alt="Student">
+        <div class="timer" id="timer">05:00</div>
+    </div>
+    <h1>Computer Basics Quiz</h1>
+    <div class="nav-grid" id="navGrid"></div>
+    <div class="quiz-content">
+        <div class="question" id="question"></div>
+        <ul class="options" id="options"></ul>
+        <div class="navigation">
+            <button id="prevBtn">Previous</button>
+            <button id="markReview">Mark for Review</button>
+            <button id="nextBtn">Next</button>
+            <button id="submitBtn">Submit</button>
+        </div>
+    </div>
+    <div class="result" id="result" style="display:none;"></div>
+</div>
+
+<script>
+const quizData = [
+    {q:"What does CPU stand for?", type:"mcq", options:["Central Process Unit","Central Processing Unit","Computer Personal Unit","Central Performance Unit"], answer:1},
+    {q:"The main memory of a computer is called?", type:"mcq", options:["RAM","ROM","Cache","Hard Disk"], answer:0},
+    {q:"HTML stands for?", type:"mcq", options:["Hyper Text Markup Language","High Text Machine Language","Hyperlinks Text Mark Language","Hyper Tool Multi Language"], answer:0},
+    {q:"The brain of the computer is?", type:"mcq", options:["CPU","RAM","Hard Disk","GPU"], answer:0},
+    {q:"A computer virus is?", type:"mcq", options:["Hardware","Software","Malware","Memory"], answer:2},
+    {q:"Which one is an input device?", type:"mcq", options:["Mouse","Monitor","Printer","Speaker"], answer:0},
+    {q:"Which is not an OS?", type:"mcq", options:["Windows","Linux","Oracle","macOS"], answer:2},
+    {q:"The Internet and World Wide Web are the same. (True/False)", type:"tf", options:["True","False"], answer:1},
+    {q:"Python is a programming language. (True/False)", type:"tf", options:["True","False"], answer:0},
+    {q:"RAM is volatile memory. (True/False)", type:"tf", options:["True","False"], answer:0}
+];
+
+let current=0;
+let answers = Array(quizData.length).fill(null);
+let marked = Array(quizData.length).fill(false);
+let timer = 300;
+let timerInterval;
+let startTime = Date.now();
+
+function startTimer(){
+    const timerEl = document.getElementById("timer");
+    timerInterval = setInterval(()=>{
+        let min=Math.floor(timer/60);
+        let sec=timer%60;
+        timerEl.textContent = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+        timer--;
+        if(timer<0){ clearInterval(timerInterval); submitQuiz(); }
+    },1000);
+}
+
+function renderNavGrid(){
+    const navGrid = document.getElementById("navGrid");
+    navGrid.innerHTML="";
+    quizData.forEach((q,i)=>{
+        const div = document.createElement("div");
+        div.textContent = i+1;
+        if(marked[i]) div.classList.add("marked");
+        else if(answers[i]!==null) div.classList.add("answered");
+        else div.classList.add("not-answered");
+        div.onclick = ()=>{current=i; loadQuestion();};
+        navGrid.appendChild(div);
+    });
+}
+
+function loadQuestion(){
+    renderNavGrid();
+    const q = quizData[current];
+    document.getElementById("question").textContent = q.q;
+    const optionsEl = document.getElementById("options");
+    optionsEl.innerHTML="";
+    q.options.forEach((opt,i)=>{
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        if(answers[current]===i) btn.classList.add("selected");
+        btn.onclick = ()=> selectAnswer(i);
+        optionsEl.appendChild(document.createElement("li")).appendChild(btn);
+    });
+    document.getElementById("prevBtn").disabled = current===0;
+}
+
+function selectAnswer(idx){ answers[current]=idx; loadQuestion(); }
+
+document.getElementById("nextBtn").addEventListener("click", ()=>{
+    if(current<quizData.length-1) current++;
+    loadQuestion();
+});
+
+document.getElementById("prevBtn").addEventListener("click", ()=>{
+    if(current>0) current--;
+    loadQuestion();
+});
+
+document.getElementById("markReview").addEventListener("click", ()=>{
+    marked[current]=true;
+    if(current<quizData.length-1) current++;
+    loadQuestion();
+});
+
+document.getElementById("submitBtn").addEventListener("click", submitQuiz);
+
+function submitQuiz(){
+    clearInterval(timerInterval);
+    const timeTaken = Math.floor((Date.now()-startTime)/1000);
+    document.querySelector(".quiz-content").style.display="none";
+    const resultEl=document.getElementById("result");
+    resultEl.style.display="block";
+    let score=0;
+    quizData.forEach((q,i)=>{ if(answers[i]===q.answer) score++; });
+    resultEl.innerHTML=`<h2>Your Score: ${score} / ${quizData.length}</h2>`;
+    resultEl.innerHTML+=`<h3>Time Taken: ${Math.floor(timeTaken/60)}m ${timeTaken%60}s</h3>`;
+    resultEl.innerHTML+="<h3>Review Answers:</h3><ul class='review-list'>";
+    quizData.forEach((q,i)=>{
+        const ua=answers[i]!==null?q.options[answers[i]]:"Not Answered";
+        const cls=answers[i]===q.answer?"correct":"wrong";
+        resultEl.innerHTML+=`<li class="${cls}">${q.q} - Your Answer: ${ua} | Correct: ${q.options[q.answer]}</li>`;
+    });
+    resultEl.innerHTML+="</ul>";
+}
+
+loadQuestion();
+startTimer();
+</script>
+</body>
+</html>
