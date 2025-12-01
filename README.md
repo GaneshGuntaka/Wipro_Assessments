@@ -1,6 +1,6 @@
 # Wipro Assessments
 **This repository contains my daily Wipro Java assessment programs.**
-
+```
 🌟 **Day-1**
 🧮 **Arithmetic Operators in Java
 Question-1:**
@@ -69,7 +69,8 @@ Output: No is Even
 **Sample Test Case 2**
 Input: 13
 Output: No is Odd
-
+```
+```
 🌟 **Day-2**
 🔢 **Sum of Array Elements**
 **Question-1:**
@@ -119,7 +120,8 @@ aabbbcccc
 
 **Explanation**
 Convert all characters to 'c' (maximum frequency).
-
+```
+```
 🌟 **Day-3**
 👤 **Classes & Objects in Java
 Question-1:**
@@ -167,7 +169,8 @@ Constructor without parameter
 Volume is 1000.0
 Constructor with parameter
 Volume is 192.0
-
+```
+```
 🌟 **Day-4
 🔲 OOPs Rectangle
 Question-1:**
@@ -189,7 +192,8 @@ Implement two classes (Bicycle, MountainBike) based on the given class diagram.
 📦 **Volume (Constructor Overloading)
 Question-4:**
 Create class ThreeDimensionShape with overloaded constructors to calculate volume for cubes and cuboids.
-
+```
+```
 🌟 **Day-5
 ⚠️ Exception Handling in Java
 Question-1:**
@@ -246,7 +250,8 @@ Displaying data summary
 Data Summary:
 Average: 46.95
 Maximum: 57.3
-
+```
+```
 🌟 **Day-6**
 **Question 1
 Sort the Collection**
@@ -422,15 +427,15 @@ Because nums[0] + nums[1] = 2 + 7 = 9
 
 
 Mappings after removal are : {1=sakshi, 2=kiran, 3=prashant}
-
-
+```
+```
 **Day-7**
 **Question-1**
 **Employee class**
 Create class Employee with attributes id, name, salary and department. Create a collection of few Employee objects. 
 Find the average of salaries of employees who belong to the “development” department.
-
-
+```
+```
 **Day-8**
 **Question-1**
 
@@ -454,7 +459,8 @@ PRODUCT 48
 RATIO O
 POWER 1679616.0
 END OF A
-
+```
+```
 **Day 9**
 
 **Question-1**
@@ -513,5 +519,7 @@ DepartmentID	   DepartmentName
 
 FirstName	      LastName	     DepartmentName	     Salary
 John	            Doe	             HR	             68000
+
+```
 
 
