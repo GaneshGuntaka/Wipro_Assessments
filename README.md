@@ -1,5 +1,5 @@
 # Wipro Assessments
-**This repository contains my daily Wipro Java assessment programs.**
+**This repository contains my daily Wipro assessments/tasks.**
 ```
 🌟 **Day-1**
 🧮 **Arithmetic Operators in Java
